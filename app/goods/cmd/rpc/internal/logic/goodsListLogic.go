@@ -28,9 +28,7 @@ func (l *GoodsListLogic) GoodsList(in *pb.GoodsListReq) (*pb.GoodsListResp, erro
 	if err != nil {
 		return nil, err
 	}
-	resp := &pb.GoodsListResp{
-		Goods: make([]*pb.GoodsInfo, len(goods)),
-	}
+	resp := &pb.GoodsListResp{Goods: make([]*pb.GoodsInfo, len(goods))}
 	for i, v := range goods {
 		resp.Goods[i] = new(pb.GoodsInfo)
 		resp.Goods[i].Id = v.Id

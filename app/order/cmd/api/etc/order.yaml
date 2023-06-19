@@ -1,0 +1,8 @@
+Name: order
+Host: 0.0.0.0
+Port: 7003
+
+OrderRpcConf:
+  Endpoints:
+    - 127.0.0.1:7103
+  NonBlock: true

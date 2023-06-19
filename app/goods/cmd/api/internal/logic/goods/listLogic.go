@@ -32,8 +32,7 @@ func (l *ListLogic) List(req *types.ListReq) (resp *types.ListResp, err error) {
 	if err != nil {
 		return nil, err
 	}
-	resp = new(types.ListResp)
-	resp.Goods = make([]types.Goods, len(gs.GetGoods()))
+	resp = &types.ListResp{Goods: make([]types.Goods, len(gs.GetGoods()))}
 	for i, v := range gs.Goods {
 		resp.Goods[i].Id = v.Id
 		resp.Goods[i].Price = float64(v.Price)

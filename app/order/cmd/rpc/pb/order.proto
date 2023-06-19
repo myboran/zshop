@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+message OrderEmpty {}
+
+message OrderInfo {
+  int64 id = 1;
+  int64 user = 2;
+  string order_sn = 3;
+  string status = 4;
+}
+
+message AllOrderResp {
+  repeated OrderInfo orders = 1;
+}
+
+message OrderGoods {
+  int64 id = 1;
+  string order_sn = 2;
+  int64 goods = 3;
+  float price = 4;
+  int64 nums = 5;
+}
+
+message OrderGoodsReq {
+  string order_sn = 1;
+}
+
+message OrderGoodsResp {
+  repeated OrderGoods orders = 1;
+}
+
+message UserOrderReq {
+  int64 user = 1;
+}
+
+message UserOrderResp {
+  repeated OrderInfo orders = 1;
+}
+
+service order {
+  rpc AllOrderInfo (OrderEmpty) returns (AllOrderResp);
+  rpc AllOrderGoods (OrderGoodsReq) returns (OrderGoodsResp);
+  rpc UserOrder (UserOrderReq) returns (UserOrderResp);
+}

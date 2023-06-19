@@ -1,60 +1,60 @@
 syntax = "v1"
 
 info(
-    title: "zshop"
-    desc: "online shop"
-    author: "myboran"
-    email: "myboran@163.com"
-    version: "v1"
+	title: "zshop"
+	desc: "online shop"
+	author: "myboran"
+	email: "myboran@163.com"
+	version: "v1"
 )
 
 type Order {
-    Id    int64     `json:"id"`
-    User  int64     `json:"user"`
-    OrderSn string `json:"order_sn"`
-    Status  string `json:"status"`
+	Id      int64  `json:"id"`
+	User    int64  `json:"user"`
+	OrderSn string `json:"order_sn"`
+	Status  string `json:"status"`
 }
 
 type UserOrderReq {
-    UserId int64 `path:"userId"`
+	UserId int64 `path:"userId"`
 }
 
 type OrderResp {
-    orders []Order `json:"orders"`
+	Orders []Order `json:"orders"`
 }
 
 type OrderGoods {
-    Id        int64   `json:"id"`
-    OrderSn   string  `json:"order_sn"`
-    Goods     int64   `json:"goods"`
-    GoodsName string  `json:"goodsName"`
-    Price     float64 `json:"price"`
-    Nums      int64   `json:"nums"`
+	Id        int64   `json:"id"`
+	OrderSn   string  `json:"order_sn"`
+	Goods     int64   `json:"goods"`
+	GoodsName string  `json:"goodsName"`
+	Price     float64 `json:"price"`
+	Nums      int64   `json:"nums"`
 }
 
 type (
-    OrderGoodsReq {
-        OrderSn string `path:"order_sn"`
-    }
-    OrderGoodsResp {
-        Goods []OrderGoods `json:"goods"`
-    }
+	OrderGoodsReq {
+		OrderSn string `path:"order_sn"`
+	}
+	OrderGoodsResp {
+		Goods []OrderGoods `json:"goods"`
+	}
 )
 @server (
-    prefix :order/v1
-    group :order
+	prefix :order/v1
+	group :order
 )
 
 service order {
-    @doc "所有订单"
-    @handler allOrder
-    get /order/all returns (OrderResp)
-
-    @doc "单个用户订单"
-    @handler userOrder
-    get /order/user/:UserId (UserOrderReq) returns (OrderResp)
-
-    @doc "单个订单的商品信息"
-    @handler orderGoods
-    get /order/goods/:OrderSn (OrderGoodsReq) returns (OrderGoodsResp)
+	@doc "所有订单"
+	@handler allOrder
+	get /order/all returns (OrderResp)
+	
+	@doc "单个用户订单"
+	@handler userOrder
+	get /order/user/:userId (UserOrderReq) returns (OrderResp)
+	
+	@doc "单个订单的商品信息"
+	@handler orderGoods
+	get /order/goods/:order_sn (OrderGoodsReq) returns (OrderGoodsResp)
 }
