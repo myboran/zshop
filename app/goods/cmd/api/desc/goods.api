@@ -1,0 +1,52 @@
+syntax = "v1"
+
+info(
+	title: "zshop"
+	desc: "online shop"
+	author: "myboran"
+	email: "myboran@163.com"
+	version: "v1"
+)
+
+type Goods {
+	Id    int64   `json:"id"`
+	Name  string  `json:"name"`
+	Price float64 `json:"price"`
+}
+
+type (
+	ListReq {
+		PageNum  int64 `path:"pageNum,default=0"`
+		PageSize int64 `path:"pageSize,default=10"`
+	}
+	ListResp {
+		Goods []Goods `json:"goods"`
+	}
+)
+
+type (
+	GoodsReq {
+		Id int64 `path:"id"`
+	}
+	GoodsResp {
+		Id     int64   `json:"id"`
+		Name   string  `json:"name"`
+		Price  float64 `json:"price"`
+		Stocks int64   `json:"stocks"`
+	}
+)
+
+@server (
+	prefix :goods/v1
+	group :goods
+)
+
+service goods {
+	@doc "商品列表"
+	@handler list
+	get /goods/list (ListReq) returns (ListResp)
+	
+	@doc "单个商品"
+	@handler goods
+	get /goods/:id (GoodsReq) returns (GoodsResp)
+}

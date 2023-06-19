@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+message InventoryEmpty {}
+
+message InventoryDetailReq {
+  int64 goods = 1;
+}
+
+message InventoryDetailResp {
+  int64 id = 1;
+  int64 goods = 2;
+  int64 stocks = 3;
+  int64 freeze = 4;
+}
+
+service inventory {
+  rpc inventoryDetail (InventoryDetailReq) returns (InventoryDetailResp);
+}

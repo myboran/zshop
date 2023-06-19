@@ -1,0 +1,5 @@
+Name: inventory.rpc
+ListenOn: 0.0.0.0:7102
+
+DB:
+  DataSource: root:123456@tcp(127.0.0.1:3306)/zshop?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai

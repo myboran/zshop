@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+message GoodsEmpty {}
+
+message GoodsInfo {
+  int64 id = 1;
+  string name = 2;
+  float price = 3;
+}
+
+message GoodsListReq {
+  int64 pageNum = 1;
+  int64 pageSize = 2;
+}
+message GoodsListResp {
+  repeated GoodsInfo goods = 1;
+}
+
+message GoodDetailReq {
+  int64 id = 1;
+}
+
+service goods {
+  rpc goodsList (GoodsListReq) returns (GoodsListResp);
+  rpc goodsDetail (GoodDetailReq) returns (GoodsInfo);
+}
